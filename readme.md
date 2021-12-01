@@ -31,7 +31,8 @@ Commands can be used with a classic **promise** or inside an async function usin
 
 Send custom command to magick.<br/>
 
-options : string, magick command with custom options<br/>
+Parameters :<br/>
+**options** : string, magick command with custom options<br/>
 
     const options = "convert -background lightblue -fill blue \
           -pointsize 72 label:christophe \
@@ -44,8 +45,9 @@ options : string, magick command with custom options<br/>
 ### convert
 
 **format**
-sourceFile : string, path to source image.<br/>
-targetFile: string, path to target image.<br/>
+Parameters :<br/>
+**sourceFile** : string, path to source image.<br/>
+**targetFile** : string, path to target image.<br/>
 
     magick.cmds
     .convert.format("c:\\images\\a.png", "c:\\images\\a.jpg")
@@ -53,10 +55,11 @@ targetFile: string, path to target image.<br/>
     .catch((e) => {console.log(e);});
 
 **resize**
-sourceFile : string, path to source image.<br/>
-targetFile: string, path to target image (if the file doesn't exist it will be created).<br/>
-resize : string, new size, can be "50%", "800x600" or "4096@".<br/>
-force : boolean, optional, force the new size even if ratio is not preserved.<br/>
+Parameters :<br/>
+**sourceFile** : string, path to source image.<br/>
+**targetFile** : string, path to target image (if the file doesn't exist it will be created).<br/>
+**resize** : string, new size, can be "50%", "800x600" or "4096@".<br/>
+**force** : boolean, optional, force the new size even if ratio is not preserved.<br/>
 
     magick.cmds
     .convert.resize(sourceFile, targetFile, resize, true)
@@ -64,11 +67,12 @@ force : boolean, optional, force the new size even if ratio is not preserved.<br
     .catch((e) => {console.log(e);});
 
 **caption**
-targetFile: string, path to target image (if the file doesn't exist it will be created).<br/>
-caption: string, text you want to write inside image.<br/>
-pointSize: number, optional, font size.<br/>
-size: string, optional, image ratio.<br/>
-gravity: string, optional, text position ("Center", "South", "North", "East", "West", "NorthWest", "NorthEast", "SouthWest", "SouthEast").<br/>
+Parameters :<br/>
+**targetFile** : string, path to target image (if the file doesn't exist it will be created).<br/>
+**caption** : string, text you want to write inside image.<br/>
+**pointSize** : number, optional, font size.<br/>
+**size** : string, optional, image ratio.<br/>
+**gravity** : string, optional, text position ("Center", "South", "North", "East", "West", "NorthWest", "NorthEast", "SouthWest", "SouthEast").<br/>
 
     magick.cmds
     .convert.caption(targetFile, "Hello world", 40, "800x600", "Center")
@@ -77,7 +81,8 @@ gravity: string, optional, text position ("Center", "South", "North", "East", "W
 
 ### identify
 
-file: string, file to analyse<br/>
+Parameters :<br/>
+**file** : string, file to analyse<br/>
 
       magick.cmds
     .identify(file)
