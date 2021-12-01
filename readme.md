@@ -44,7 +44,7 @@ Parameters :<br/>
 
 ### convert
 
-**format**
+**format**<br/>
 Parameters :<br/>
 **sourceFile** : string, path to source image.<br/>
 **targetFile** : string, path to target image.<br/>
@@ -54,7 +54,7 @@ Parameters :<br/>
     .then((response) => console.log(response))
     .catch((e) => {console.log(e);});
 
-**resize**
+**resize**<br/>
 Parameters :<br/>
 **sourceFile** : string, path to source image.<br/>
 **targetFile** : string, path to target image (if the file doesn't exist it will be created).<br/>
@@ -66,7 +66,7 @@ Parameters :<br/>
     .then((response) => console.log(response))
     .catch((e) => {console.log(e);});
 
-**caption**
+**caption**<br/>
 Parameters :<br/>
 **targetFile** : string, path to target image (if the file doesn't exist it will be created).<br/>
 **caption** : string, text you want to write inside image.<br/>
