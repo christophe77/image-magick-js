@@ -1,6 +1,6 @@
 {
   "name": "image-magick-js",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "ImageMagick wrapper javascript",
   "keywords": [
     "ImageMagick"
