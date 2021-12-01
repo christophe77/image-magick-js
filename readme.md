@@ -37,8 +37,7 @@ Parameters :<br/>
     const options = "convert -background lightblue -fill blue \
           -pointsize 72 label:christophe \
           label.gif";
-    magick.cmds
-    .custom(options)
+    magick.custom(options)
     .then((response) => console.log(response))
     .catch((e) => {console.log(e);});
 
@@ -54,8 +53,7 @@ Parameters :<br/>
         sourceFile: string,
         targetFile: string,
     }
-    magick.cmds
-    .convert.format(params)
+    magick.convert.format(params)
     .then((response) => console.log(response))
     .catch((e) => {console.log(e);});
 
@@ -75,8 +73,7 @@ If the parameter is not defined targeted file will be the source file.<br/>
         targetFile: string,
         force: boolean,
     }
-    magick.cmds
-    .convert.resize(params)
+    magick.convert.resize(params)
     .then((response) => console.log(response))
     .catch((e) => {console.log(e);});
 
@@ -96,8 +93,7 @@ Parameters :<br/>
         size: string,
         gravity: string
     }
-    magick.cmds
-    .convert.caption(params)
+    magick.convert.caption(params)
     .then((response) => console.log(response))
     .catch((e) => {console.log(e);});
 
@@ -106,8 +102,7 @@ Parameters :<br/>
 Parameters :<br/>
 **file** : string, file to analyse<br/>
 
-      magick.cmds
-    .identify(file)
+    magick.identify(file)
     .then((response) => console.log(response))
     .catch((e) => {console.log(e);});
 

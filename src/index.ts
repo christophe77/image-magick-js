@@ -2,9 +2,9 @@ import identify from './commands/identify';
 import { convert } from './commands/convert';
 import custom from './commands/custom';
 
-const commands = {
+const magick = {
   identify,
   convert,
   custom,
 };
-exports.cmds = commands;
+module.exports = magick;

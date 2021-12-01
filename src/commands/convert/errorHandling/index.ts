@@ -2,7 +2,12 @@ import fs from 'fs';
 import { ResizeParams, FormatParams, CaptionParams } from '../types';
 
 export function checkResizeParameters(params: ResizeParams): void {
+  if (!params) {
+    throw ReferenceError('parameters are required');
+  }
+
   const { targetFile, sourceFile, resize } = params;
+
   if (!sourceFile || sourceFile === '') {
     throw TypeError('sourceFile property is missing');
   }
@@ -18,7 +23,12 @@ export function checkResizeParameters(params: ResizeParams): void {
 }
 
 export function checkCaptionParameters(params: CaptionParams): void {
+  if (!params) {
+    throw ReferenceError('parameters are required');
+  }
+
   const { caption, targetFile } = params;
+
   if (!caption || caption === '') {
     throw TypeError('caption property is missing');
   }
@@ -28,7 +38,12 @@ export function checkCaptionParameters(params: CaptionParams): void {
 }
 
 export function checkFormatParameters(params: FormatParams): void {
+  if (!params) {
+    throw ReferenceError('parameters are required');
+  }
+
   const { targetFile, sourceFile } = params;
+
   if (!sourceFile || sourceFile === '') {
     throw TypeError('sourceFile cannot be empty');
   }
