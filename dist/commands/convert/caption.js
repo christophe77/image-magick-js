@@ -17,10 +17,11 @@ const fs_1 = __importDefault(require("fs"));
 const child_process_1 = require("child_process");
 const core_1 = require("../../core/core");
 const errorHandling_1 = require("./errorHandling");
-function resize(targetFile, caption, pointSize, size, gravity) {
+function caption(params) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            (0, errorHandling_1.checkCaptionParameters)(targetFile, caption);
+            (0, errorHandling_1.checkCaptionParameters)(params);
+            const { targetFile, pointSize, size, gravity, caption } = params;
             const execAsync = util_1.default.promisify(child_process_1.exec);
             if (!fs_1.default.existsSync(targetFile)) {
                 fs_1.default.closeSync(fs_1.default.openSync(targetFile, 'w'));
@@ -42,4 +43,4 @@ function resize(targetFile, caption, pointSize, size, gravity) {
         }
     });
 }
-exports.default = resize;
+exports.default = caption;

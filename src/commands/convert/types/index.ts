@@ -2,24 +2,25 @@ export type MagickResponse = {
   success: boolean;
   output: string;
 };
-
+export type ResizeParams = {
+  sourceFile: string;
+  resize: string;
+  targetFile: string;
+  force: boolean;
+};
+export type FormatParams = {
+  sourceFile: string;
+  targetFile: string;
+};
+export type CaptionParams = {
+  targetFile: string;
+  caption: string;
+  pointSize: number;
+  size: string;
+  gravity: string;
+};
 export type Convert = {
-  resize: (
-    sourceFile: string,
-    targetFile: string,
-    resize: string,
-    force: boolean,
-  ) => Promise<MagickResponse>;
-  format: (
-    sourceFile: string,
-    targetFile: string,
-    options: string,
-  ) => Promise<MagickResponse>;
-  caption: (
-    targetFile: string,
-    caption: string,
-    pointSize: number,
-    size: string,
-    gravity: string,
-  ) => Promise<MagickResponse>;
+  resize: (params: ResizeParams) => Promise<MagickResponse>;
+  format: (params: FormatParams) => Promise<MagickResponse>;
+  caption: (params: CaptionParams) => Promise<MagickResponse>;
 };

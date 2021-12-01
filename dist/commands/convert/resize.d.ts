@@ -1,2 +1,2 @@
-import { MagickResponse } from './types';
-export default function resize(sourceFile: string, targetFile: string, resize: string, force: boolean): Promise<MagickResponse>;
+import { MagickResponse, ResizeParams } from './types';
+export default function resize(params: ResizeParams): Promise<MagickResponse>;

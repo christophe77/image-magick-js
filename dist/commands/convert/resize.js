@@ -13,18 +13,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const util_1 = __importDefault(require("util"));
+const fs_1 = __importDefault(require("fs"));
 const child_process_1 = require("child_process");
 const core_1 = require("../../core/core");
 const errorHandling_1 = require("./errorHandling");
-function resize(sourceFile, targetFile, resize, force) {
+function resize(params) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            (0, errorHandling_1.checkResizeParameters)(sourceFile, targetFile, resize);
-            const execAsync = util_1.default.promisify(child_process_1.exec);
-            if (force) {
-                resize = `${resize}\!`;
+            (0, errorHandling_1.checkResizeParameters)(params);
+            const { targetFile, sourceFile, force, resize } = params;
+            if (targetFile && !fs_1.default.existsSync(targetFile)) {
+                fs_1.default.closeSync(fs_1.default.openSync(targetFile, 'w'));
             }
-            const { stdout, stderr } = yield execAsync(`${core_1.imageMagickCmd} convert ${sourceFile} -resize ${resize} ${targetFile}`);
+            const fileToResize = targetFile ? targetFile : sourceFile;
+            const resizeOption = force ? `${resize}\!` : resize;
+            const execAsync = util_1.default.promisify(child_process_1.exec);
+            const { stdout, stderr } = yield execAsync(`${core_1.imageMagickCmd} convert ${sourceFile} -resize ${resizeOption} ${fileToResize}`);
             if (stderr) {
                 throw TypeError(stderr);
             }

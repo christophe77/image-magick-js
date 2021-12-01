@@ -13,14 +13,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const util_1 = __importDefault(require("util"));
+const fs_1 = __importDefault(require("fs"));
 const child_process_1 = require("child_process");
 const core_1 = require("../../core/core");
 const errorHandling_1 = require("./errorHandling");
-function format(sourceFile, targetFile, options) {
+function format(params) {
     return __awaiter(this, void 0, void 0, function* () {
-        (0, errorHandling_1.checkFormatParameters)(sourceFile, targetFile);
+        (0, errorHandling_1.checkFormatParameters)(params);
+        const { targetFile, sourceFile } = params;
+        if (!fs_1.default.existsSync(targetFile)) {
+            fs_1.default.closeSync(fs_1.default.openSync(targetFile, 'w'));
+        }
         const execAsync = util_1.default.promisify(child_process_1.exec);
-        const { stdout, stderr } = yield execAsync(`${core_1.imageMagickCmd} convert ${sourceFile} ${targetFile} ${options}`);
+        const { stdout, stderr } = yield execAsync(`${core_1.imageMagickCmd} convert ${sourceFile} ${targetFile}`);
         if (stderr) {
             throw TypeError(stderr);
         }

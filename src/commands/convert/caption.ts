@@ -2,22 +2,19 @@ import util from 'util';
 import fs from 'fs';
 import { exec } from 'child_process';
 import { imageMagickCmd } from '../../core/core';
-import { MagickResponse } from './types';
+import { MagickResponse, CaptionParams } from './types';
 import { checkCaptionParameters } from './errorHandling';
 
-export default async function resize(
-  targetFile: string,
-  caption: string,
-  pointSize: number,
-  size: string,
-  gravity: string,
+export default async function caption(
+  params: CaptionParams,
 ): Promise<MagickResponse> {
   try {
-    checkCaptionParameters(targetFile, caption);
+    checkCaptionParameters(params);
+    const { targetFile, pointSize, size, gravity, caption } = params
     const execAsync = util.promisify(exec);
     if (!fs.existsSync(targetFile)) {
-        fs.closeSync(fs.openSync(targetFile, 'w'));
-      }
+      fs.closeSync(fs.openSync(targetFile, 'w'));
+    }
     const pointSizeOption =
       (pointSize?.toString() !== '' && `-pointsize ${pointSize}`) || '';
     const sizeOption = (size && size !== '' && `-size ${size}`) || '';

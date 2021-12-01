@@ -1,28 +1,24 @@
 import fs from 'fs';
+import { ResizeParams, FormatParams, CaptionParams } from '../types';
 
-export function checkResizeParameters(
-  sourceFile: string,
-  targetFile: string,
-  resize: string,
-): void {
+export function checkResizeParameters(params: ResizeParams): void {
+  const { targetFile, sourceFile, resize } = params;
   if (!sourceFile || sourceFile === '') {
     throw TypeError('sourceFile property is missing');
   }
   if (!fs.existsSync(sourceFile)) {
     throw TypeError(`cannot find file ${sourceFile}`);
   }
-  if (!targetFile || targetFile === '') {
-    throw TypeError('targetFile property is missing');
-  }
   if (!resize || resize === '') {
     throw TypeError('resize property is missing');
   }
+  if (targetFile && !fs.existsSync(targetFile)) {
+    throw TypeError(`cannot find file ${targetFile}`);
+  }
 }
 
-export function checkCaptionParameters(
-  targetFile: string,
-  caption: string,
-): void {
+export function checkCaptionParameters(params: CaptionParams): void {
+  const { caption, targetFile } = params;
   if (!caption || caption === '') {
     throw TypeError('caption property is missing');
   }
@@ -31,10 +27,8 @@ export function checkCaptionParameters(
   }
 }
 
-export function checkFormatParameters(
-  sourceFile: string,
-  targetFile: string,
-): void {
+export function checkFormatParameters(params: FormatParams): void {
+  const { targetFile, sourceFile } = params;
   if (!sourceFile || sourceFile === '') {
     throw TypeError('sourceFile cannot be empty');
   }

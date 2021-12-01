@@ -45,28 +45,43 @@ Parameters :<br/>
 ### convert
 
 **format**<br/>
+
 Parameters :<br/>
 **sourceFile** : string, path to source image.<br/>
 **targetFile** : string, path to target image.<br/>
 
+    const params={
+        sourceFile: string,
+        targetFile: string,
+    }
     magick.cmds
-    .convert.format("c:\\images\\a.png", "c:\\images\\a.jpg")
+    .convert.format(params)
     .then((response) => console.log(response))
     .catch((e) => {console.log(e);});
 
 **resize**<br/>
+
 Parameters :<br/>
 **sourceFile** : string, path to source image.<br/>
-**targetFile** : string, path to target image (if the file doesn't exist it will be created).<br/>
 **resize** : string, new size, can be "50%", "800x600" or "4096@".<br/>
 **force** : boolean, optional, force the new size even if ratio is not preserved.<br/>
+**targetFile** : string, optional, path to target image<br/>
+If the file doesn't exist it will be created.<br/>
+If the parameter is not defined targeted file will be the source file.<br/>
 
+    const params={
+        sourceFile: string,
+        resize: string,
+        targetFile: string,
+        force: boolean,
+    }
     magick.cmds
-    .convert.resize(sourceFile, targetFile, resize, true)
+    .convert.resize(params)
     .then((response) => console.log(response))
     .catch((e) => {console.log(e);});
 
 **caption**<br/>
+
 Parameters :<br/>
 **targetFile** : string, path to target image (if the file doesn't exist it will be created).<br/>
 **caption** : string, text you want to write inside image.<br/>
@@ -74,8 +89,15 @@ Parameters :<br/>
 **size** : string, optional, image ratio.<br/>
 **gravity** : string, optional, text position ("Center", "South", "North", "East", "West", "NorthWest", "NorthEast", "SouthWest", "SouthEast").<br/>
 
+    const params={
+        targetFile: string,
+        caption: string,
+        pointSize: number,
+        size: string,
+        gravity: string
+    }
     magick.cmds
-    .convert.caption(targetFile, "Hello world", 40, "800x600", "Center")
+    .convert.caption(params)
     .then((response) => console.log(response))
     .catch((e) => {console.log(e);});
 

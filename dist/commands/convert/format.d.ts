@@ -1,2 +1,2 @@
-import { MagickResponse } from './types';
-export default function format(sourceFile: string, targetFile: string, options: string): Promise<MagickResponse>;
+import { MagickResponse, FormatParams } from './types';
+export default function format(params: FormatParams): Promise<MagickResponse>;
