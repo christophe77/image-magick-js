@@ -6,16 +6,16 @@ export function checkResizeParameters(params: ResizeParams): void {
     throw ReferenceError('parameters are required');
   }
 
-  const { targetFile, sourceFile, resize } = params;
+  const { sourceFile, resize } = params;
 
   if (!sourceFile || sourceFile === '') {
-    throw TypeError('sourceFile property is missing');
+    throw TypeError('sourceFile parameter is empty');
   }
   if (!fs.existsSync(sourceFile)) {
     throw TypeError(`cannot find file ${sourceFile}`);
   }
   if (!resize || resize === '') {
-    throw TypeError('resize property is missing');
+    throw TypeError('resize parameter is empty');
   }
 }
 
@@ -27,10 +27,10 @@ export function checkCaptionParameters(params: CaptionParams): void {
   const { caption, targetFile } = params;
 
   if (!caption || caption === '') {
-    throw TypeError('caption property is missing');
+    throw TypeError('caption parameter is empty');
   }
   if (!targetFile || targetFile === '') {
-    throw TypeError('targetFile property is missing');
+    throw TypeError('targetFile parameter is empty');
   }
 }
 
@@ -42,15 +42,12 @@ export function checkFormatParameters(params: FormatParams): void {
   const { targetFile, sourceFile } = params;
 
   if (!sourceFile || sourceFile === '') {
-    throw TypeError('sourceFile cannot be empty');
+    throw TypeError('sourceFile parameter is empty');
   }
   if (!targetFile || targetFile === '') {
-    throw TypeError('sourceFile cannot be empty');
+    throw TypeError('targetFile parameter is empty');
   }
   if (!fs.existsSync(sourceFile)) {
     throw TypeError(`cannot find file ${sourceFile}`);
-  }
-  if (!fs.existsSync(targetFile)) {
-    throw TypeError(`cannot find file ${targetFile}`);
   }
 }

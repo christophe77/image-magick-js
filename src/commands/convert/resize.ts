@@ -1,10 +1,10 @@
 import util from 'util';
 import fs from 'fs';
 import { exec } from 'child_process';
-import { imageMagickCmd } from '../../core/core';
+import { imageMagickCmd } from '../../utils/constants';
+import { createFileIfDoesntExistSync } from '../../utils/files';
 import { MagickResponse, ResizeParams } from './types';
 import { checkResizeParameters } from './errorHandling';
-
 
 export default async function resize(
   params: ResizeParams,
@@ -12,21 +12,16 @@ export default async function resize(
   try {
     checkResizeParameters(params);
     const { targetFile, sourceFile, force, resize } = params;
+    const targetResizedFile = targetFile ? targetFile : sourceFile;
+    createFileIfDoesntExistSync(targetResizedFile);
 
-    if (targetFile && !fs.existsSync(targetFile)) {
-      fs.closeSync(fs.openSync(targetFile, 'w'));
-    }
-    const fileToResize = targetFile ? targetFile : sourceFile;
     const resizeOption = force ? `${resize}\!` : resize;
 
     const execAsync = util.promisify(exec);
 
-    const { stdout, stderr } = await execAsync(
-      `${imageMagickCmd} convert ${sourceFile} -resize ${resizeOption} ${fileToResize}`,
+    const { stdout } = await execAsync(
+      `${imageMagickCmd} convert ${sourceFile} -resize ${resizeOption} ${targetResizedFile}`,
     );
-    if (stderr) {
-      throw TypeError(stderr);
-    }
     return {
       success: true,
       output: stdout,

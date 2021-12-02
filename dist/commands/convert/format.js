@@ -21,14 +21,9 @@ function format(params) {
     return __awaiter(this, void 0, void 0, function* () {
         (0, errorHandling_1.checkFormatParameters)(params);
         const { targetFile, sourceFile } = params;
-        if (!fs_1.default.existsSync(targetFile)) {
-            fs_1.default.closeSync(fs_1.default.openSync(targetFile, 'w'));
-        }
+        createFileIfDoesntExistSync(targetFile);
         const execAsync = util_1.default.promisify(child_process_1.exec);
-        const { stdout, stderr } = yield execAsync(`${core_1.imageMagickCmd} convert ${sourceFile} ${targetFile}`);
-        if (stderr) {
-            throw TypeError(stderr);
-        }
+        const { stdout } = yield execAsync(`${core_1.imageMagickCmd} convert ${sourceFile} ${targetFile}`);
         return {
             success: true,
             output: stdout,
@@ -36,3 +31,8 @@ function format(params) {
     });
 }
 exports.default = format;
+const createFileIfDoesntExistSync = (file) => {
+    if (!fs_1.default.existsSync(file)) {
+        fs_1.default.closeSync(fs_1.default.openSync(file, 'w'));
+    }
+};

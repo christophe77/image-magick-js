@@ -21,7 +21,7 @@ describe('ConvertResize', () => {
     const result = await convert.resize(resizeGoodParams);
     expect(result).toEqual(expect.objectContaining(convertExpectedResult));
   });
-  it('should throw parameter is missing', async () => {
+  it('should throw parameter is empty', async () => {
     const resizeMissingParams = {
       sourceFile: '',
       resize: '',
@@ -29,10 +29,10 @@ describe('ConvertResize', () => {
       force: true,
     };
     await expect(convert.resize(resizeMissingParams)).rejects.toThrow(
-      'sourceFile property is missing',
+      'sourceFile parameter is empty',
     );
   });
-  it('should throw parameter is missing', async () => {
+  it('should throw cannot find file', async () => {
     const sourceFileMissingParams = {
       sourceFile: unexistingFile,
       resize: '800x600',

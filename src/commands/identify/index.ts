@@ -2,7 +2,7 @@ import util from 'util';
 import { exec } from 'child_process';
 import { Identify } from './types';
 import { checkIdentifyParameters } from './errorHandling';
-import { imageMagickCmd } from '../../core/core';
+import { imageMagickCmd } from '../../utils/constants';
 
 export default async function identify(file: string): Promise<Identify> {
   checkIdentifyParameters(file);

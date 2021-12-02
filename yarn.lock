@@ -1631,6 +1631,11 @@ form-data@^3.0.0:
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
 
+fs-monkey@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/fs-monkey/-/fs-monkey-1.0.3.tgz#ae3ac92d53bb328efe0e9a1d9541f6ad8d48e2d3"
+  integrity sha512-cybjIfiiE+pTWicSCLFHSrXZ6EilF30oh91FDP9S2B051prEa7QWfrVTQm10/dDpswBDXZugPa1Ogu8Yh+HV0Q==
+
 fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
@@ -2631,6 +2636,13 @@ makeerror@1.0.12:
   integrity sha512-JmqCvUhmt43madlpFzG4BQzG2Z3m6tvQDNKdClZnO3VbIudJYmxsT0FNJMeiB2+JTSlTQTSbU8QdesVmwJcmLg==
   dependencies:
     tmpl "1.0.5"
+
+memfs@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/memfs/-/memfs-3.4.0.tgz#8bc12062b973be6b295d4340595736a656f0a257"
+  integrity sha512-o/RfP0J1d03YwsAxyHxAYs2kyJp55AFkMazlFAZFR2I2IXkxiUTXRabJ6RmNNCQ83LAD2jy52Khj0m3OffpNdA==
+  dependencies:
+    fs-monkey "1.0.3"
 
 merge-stream@^2.0.0:
   version "2.0.0"
