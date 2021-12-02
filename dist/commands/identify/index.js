@@ -15,13 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const util_1 = __importDefault(require("util"));
 const child_process_1 = require("child_process");
 const errorHandling_1 = require("./errorHandling");
-const core_1 = require("../../core/core");
+const constants_1 = require("../../utils/constants");
 function identify(file) {
     return __awaiter(this, void 0, void 0, function* () {
         (0, errorHandling_1.checkIdentifyParameters)(file);
         const execAsync = util_1.default.promisify(child_process_1.exec);
         try {
-            const { stdout } = yield execAsync(`${core_1.imageMagickCmd} identify ${file}`);
+            const { stdout } = yield execAsync(`${constants_1.imageMagickCmd} identify ${file}`);
             return {
                 filename: stdout.split(' ')[0],
                 imageFormat: stdout.split(' ')[1],
@@ -35,10 +35,10 @@ function identify(file) {
             };
         }
         catch (e) {
-            const error = e.message.includes('improper')
+            const message = e.message;
+            throw TypeError(message.includes('improper')
                 ? 'file is corrupted or not image file'
-                : e;
-            throw TypeError(error);
+                : message);
         }
     });
 }

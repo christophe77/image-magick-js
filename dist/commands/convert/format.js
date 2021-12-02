@@ -13,17 +13,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const util_1 = __importDefault(require("util"));
-const fs_1 = __importDefault(require("fs"));
 const child_process_1 = require("child_process");
-const core_1 = require("../../core/core");
+const constants_1 = require("../../utils/constants");
+const files_1 = require("../../utils/files");
 const errorHandling_1 = require("./errorHandling");
 function format(params) {
     return __awaiter(this, void 0, void 0, function* () {
         (0, errorHandling_1.checkFormatParameters)(params);
         const { targetFile, sourceFile } = params;
-        createFileIfDoesntExistSync(targetFile);
+        (0, files_1.createFileIfDoesntExistSync)(targetFile);
         const execAsync = util_1.default.promisify(child_process_1.exec);
-        const { stdout } = yield execAsync(`${core_1.imageMagickCmd} convert ${sourceFile} ${targetFile}`);
+        const { stdout } = yield execAsync(`${constants_1.imageMagickCmd} convert ${sourceFile} ${targetFile}`);
         return {
             success: true,
             output: stdout,
@@ -31,8 +31,3 @@ function format(params) {
     });
 }
 exports.default = format;
-const createFileIfDoesntExistSync = (file) => {
-    if (!fs_1.default.existsSync(file)) {
-        fs_1.default.closeSync(fs_1.default.openSync(file, 'w'));
-    }
-};

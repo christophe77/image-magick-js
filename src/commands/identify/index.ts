@@ -4,13 +4,13 @@ import { Identify } from './types';
 import { checkIdentifyParameters } from './errorHandling';
 import { imageMagickCmd } from '../../utils/constants';
 
-export default async function identify(file: string): Promise<Identify> {
+export default async function identify(
+  file: string,
+): Promise<Identify | unknown> {
   checkIdentifyParameters(file);
   const execAsync = util.promisify(exec);
   try {
-    const { stdout } = await execAsync(
-      `${imageMagickCmd} identify ${file}`,
-    );
+    const { stdout } = await execAsync(`${imageMagickCmd} identify ${file}`);
     return {
       filename: stdout.split(' ')[0],
       imageFormat: stdout.split(' ')[1],
@@ -22,10 +22,12 @@ export default async function identify(file: string): Promise<Identify> {
       elapsedTime: stdout.split(' ')[8].replace('\r\n', ''),
       error: '',
     };
-  } catch (e: any) {
-    const error: string = e.message.includes('improper')
-      ? 'file is corrupted or not image file'
-      : e;
-    throw TypeError(error);
+  } catch (e) {
+    const message = (e as Error).message;
+    throw TypeError(
+      message.includes('improper')
+        ? 'file is corrupted or not image file'
+        : message,
+    );
   }
 }

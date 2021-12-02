@@ -1,5 +1,4 @@
 import util from 'util';
-import fs from 'fs';
 import { exec } from 'child_process';
 import { imageMagickCmd } from '../../utils/constants';
 import { createFileIfDoesntExistSync } from '../../utils/files';
@@ -15,7 +14,7 @@ export default async function resize(
     const targetResizedFile = targetFile ? targetFile : sourceFile;
     createFileIfDoesntExistSync(targetResizedFile);
 
-    const resizeOption = force ? `${resize}\!` : resize;
+    const resizeOption = force ? `${resize}!` : resize;
 
     const execAsync = util.promisify(exec);
 

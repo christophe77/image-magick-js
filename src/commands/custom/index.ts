@@ -7,10 +7,8 @@ import { checkCustomParameters } from './errorHandling';
 export default async function custom(options: string): Promise<Custom> {
   checkCustomParameters(options);
   const execAsync = util.promisify(exec);
-  const { stdout, stderr } = await execAsync(`${imageMagickCmd} ${options}`);
-  if (stderr) {
-    throw TypeError(stderr);
-  }
+  const { stdout } = await execAsync(`${imageMagickCmd} ${options}`);
+
   return {
     output: stdout,
   };

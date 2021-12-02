@@ -14,16 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const util_1 = __importDefault(require("util"));
 const child_process_1 = require("child_process");
-const core_1 = require("../../core/core");
+const constants_1 = require("../../utils/constants");
 const errorHandling_1 = require("./errorHandling");
 function custom(options) {
     return __awaiter(this, void 0, void 0, function* () {
         (0, errorHandling_1.checkCustomParameters)(options);
         const execAsync = util_1.default.promisify(child_process_1.exec);
-        const { stdout, stderr } = yield execAsync(`${core_1.imageMagickCmd} ${options}`);
-        if (stderr) {
-            throw TypeError(stderr);
-        }
+        const { stdout } = yield execAsync(`${constants_1.imageMagickCmd} ${options}`);
         return {
             output: stdout,
         };

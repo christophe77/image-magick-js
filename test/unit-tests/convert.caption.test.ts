@@ -24,4 +24,16 @@ describe('ConvertCaption', () => {
     const result = await convert.caption(captionGoodParams);
     expect(result).toEqual(expect.objectContaining(convertExpectedResult));
   });
+  it('should throw an error message', async () => {
+    const captionBadParams = {
+      targetFile:"",
+      pointSize:-99,
+      size:"error",
+      gravity:"error",
+      caption:"error",
+    };
+    await expect(convert.caption(captionBadParams)).rejects.toThrow(
+      'targetFile parameter is empty',
+    );
+  });
 });
