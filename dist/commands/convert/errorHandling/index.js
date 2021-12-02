@@ -19,9 +19,6 @@ function checkResizeParameters(params) {
     if (!resize || resize === '') {
         throw TypeError('resize property is missing');
     }
-    if (targetFile && !fs_1.default.existsSync(targetFile)) {
-        throw TypeError(`cannot find file ${targetFile}`);
-    }
 }
 exports.checkResizeParameters = checkResizeParameters;
 function checkCaptionParameters(params) {

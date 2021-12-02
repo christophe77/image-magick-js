@@ -20,21 +20,26 @@ function identify(file) {
     return __awaiter(this, void 0, void 0, function* () {
         (0, errorHandling_1.checkIdentifyParameters)(file);
         const execAsync = util_1.default.promisify(child_process_1.exec);
-        const { stdout, stderr } = yield execAsync(`${core_1.imageMagickCmd} identify ${file}`);
-        if (stderr) {
-            throw TypeError(stderr);
+        try {
+            const { stdout } = yield execAsync(`${core_1.imageMagickCmd} identify ${file}`);
+            return {
+                filename: stdout.split(' ')[0],
+                imageFormat: stdout.split(' ')[1],
+                widthXheight: stdout.split(' ')[2],
+                pageWidthXpageHeightXoffsetYoffset: stdout.split(' ')[3],
+                colorspace: `${stdout.split(' ')[4]} ${stdout.split(' ')[5]}`,
+                weight: stdout.split(' ')[6],
+                userTime: stdout.split(' ')[7],
+                elapsedTime: stdout.split(' ')[8].replace('\r\n', ''),
+                error: '',
+            };
         }
-        return {
-            filename: stdout.split(' ')[0],
-            imageFormat: stdout.split(' ')[1],
-            widthXheight: stdout.split(' ')[2],
-            pageWidthXpageHeightXoffsetYoffset: stdout.split(' ')[3],
-            colorspace: `${stdout.split(' ')[4]} ${stdout.split(' ')[5]}`,
-            weight: stdout.split(' ')[6],
-            userTime: stdout.split(' ')[7],
-            elapsedTime: stdout.split(' ')[8].replace('\r\n', ''),
-            error: '',
-        };
+        catch (e) {
+            const error = e.message.includes('improper')
+                ? 'file is corrupted or not image file'
+                : e;
+            throw TypeError(error);
+        }
     });
 }
 exports.default = identify;
