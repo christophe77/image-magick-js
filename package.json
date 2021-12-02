@@ -17,7 +17,7 @@
     "start": "tsc && node dist/index.js",
     "build": "tsc",
     "prepublish": "yarn build",
-    "test": "jest --verbose",
+    "test": "jest --coverage",
     "test-watch": "jest --verbose --watchAll",
     "lint": "eslint . --ext .ts"
   },
