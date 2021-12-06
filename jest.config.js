@@ -5,4 +5,9 @@ module.exports = {
   moduleFileExtensions: ['js', 'ts'],
   testMatch: ['**/test/**/*.test.(ts|js)'],
   testEnvironment: 'node',
+  coverageReporters: [
+    "json-summary", 
+    "text",
+    "lcov"
+  ]
 };

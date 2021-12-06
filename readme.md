@@ -1,5 +1,7 @@
 # ImageMagickJS
 
+<img src="./coverage/badge-functions.svg">
+
 ImageMagick wrapper for nodeJS.<br/>
 ImageMagick should be installed on dev and prod machine in order to work.<br/>
 For windows users you need to add a PATH env variable called "magick" and linking to magick.exe.<br/>
